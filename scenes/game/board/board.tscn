@@ -1,3 +1,6 @@
 [gd_scene format=3 uid="uid://baafybu0vm272"]
 
+[ext_resource type="Script" uid="uid://dsendslrilern" path="res://scripts/game/board.gd" id="1_84mny"]
+
 [node name="Board" type="Node3D" unique_id=912899170]
+script = ExtResource("1_84mny")

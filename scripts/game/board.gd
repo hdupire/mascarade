@@ -1,9 +1,12 @@
+extends Node3D
+
 class_name Board
 
 # Grid of playable spaces
 
 const WIDTH := 40
 const HEIGHT := 40
+const players_count := 4
 
 var grid := []
 
@@ -19,3 +22,8 @@ func _init():
 			
 func is_walkable(pos: Vector2i):
 	return grid[pos.y][pos.x].is_walkable
+	
+func _ready():
+	var mask = preload("res://scenes/game/board/mask_root.tscn").instantiate()
+	add_child(mask)
+	mask.generate(players_count)
