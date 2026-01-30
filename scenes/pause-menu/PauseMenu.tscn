@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://1xdge4lu4rnu"]
+
+[ext_resource type="PackedScene" uid="uid://b0hivisbpuq2" path="res://scenes/pause-menu/components/PauseLabel.tscn" id="1_44h6o"]
+[ext_resource type="Script" uid="uid://tmet5ne870en" path="res://scripts/pause-menu/pause.gd" id="1_gddaf"]
+[ext_resource type="PackedScene" uid="uid://b168nkaoarjha" path="res://scenes/pause-menu/components/ContinueButton.tscn" id="2_gddaf"]
+[ext_resource type="PackedScene" uid="uid://dlixtcubuesw5" path="res://scenes/pause-menu/components/QuitButton.tscn" id="3_j26sk"]
+
+[node name="PauseMenu" type="Control" unique_id=1920317399]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gddaf")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1738533306]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1669090533]
+layout_mode = 2
+
+[node name="PauseLabel" parent="CenterContainer/VBoxContainer" unique_id=1232193572 instance=ExtResource("1_44h6o")]
+layout_mode = 2
+
+[node name="ContinueButton" parent="CenterContainer/VBoxContainer" unique_id=1192437830 instance=ExtResource("2_gddaf")]
+layout_mode = 2
+
+[node name="QuitButton" parent="CenterContainer/VBoxContainer" unique_id=1438462868 instance=ExtResource("3_j26sk")]
+layout_mode = 2

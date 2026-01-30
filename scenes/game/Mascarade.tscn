@@ -2,8 +2,16 @@
 
 [ext_resource type="PackedScene" uid="uid://dwfqdvqnsxg2h" path="res://scenes/game/board-view.tscn" id="1_6aw33"]
 [ext_resource type="PackedScene" uid="uid://bqhulaerjjcu" path="res://scenes/game/ui/ui.tscn" id="1_6y6ry"]
+[ext_resource type="Script" uid="uid://nd5wu0xjcyac" path="res://scripts/game/game.gd" id="1_uk4eb"]
+[ext_resource type="PackedScene" uid="uid://1xdge4lu4rnu" path="res://scenes/pause-menu/PauseMenu.tscn" id="4_0mebi"]
 
 [node name="Mascarade" type="Node3D" unique_id=1707848801]
+script = ExtResource("1_uk4eb")
+
+[node name="PauseMenu" parent="." unique_id=1920317399 node_paths=PackedStringArray("shortcut_context") instance=ExtResource("4_0mebi")]
+process_mode = 2
+visible = false
+shortcut_context = NodePath(".")
 
 [node name="Ui" parent="." unique_id=1600666623 instance=ExtResource("1_6y6ry")]
 

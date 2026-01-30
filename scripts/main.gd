@@ -9,7 +9,6 @@ func load_menu() -> void:
 	_change_scene("res://scenes/main-menu/main-menu.tscn")
 
 func load_game() -> void:
-	print("LOAD GAME")
 	_change_scene("res://scenes/game/Mascarade.tscn")
 
 func _change_scene(path) -> void:

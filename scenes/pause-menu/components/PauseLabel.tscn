@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b0hivisbpuq2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nm8c6"]
+font_size = 40
+
+[node name="PauseLabel" type="Label" unique_id=1232193572]
+text = "Pause"
+label_settings = SubResource("LabelSettings_nm8c6")
