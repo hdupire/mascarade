@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dbyvyo47w10ui"]
+
+[node name="Ball" type="Node3D" unique_id=1577439196]
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="." unique_id=745156833]
+editor_description = "masque"

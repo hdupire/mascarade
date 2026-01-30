@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bqhulaerjjcu"]
 
-[ext_resource type="PackedScene" uid="uid://c254e3nrueoby" path="res://scenes/ui/hud.tscn" id="1_u7n8c"]
+[ext_resource type="PackedScene" uid="uid://c254e3nrueoby" path="res://scenes/game/ui/hud.tscn" id="1_u7n8c"]
 
 [node name="Ui" type="CanvasLayer" unique_id=1600666623]
 
