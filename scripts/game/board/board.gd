@@ -26,4 +26,3 @@ func is_walkable(pos: Vector2i):
 func _ready():
 	var mask = preload("res://scenes/game/board/mask_root.tscn").instantiate()
 	add_child(mask)
-	mask.generate(players_count)

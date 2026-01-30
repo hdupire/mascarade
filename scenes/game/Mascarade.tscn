@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cmkpcyhht2xm5"]
 
-[ext_resource type="PackedScene" uid="uid://dwfqdvqnsxg2h" path="res://scenes/game/board-view.tscn" id="1_6aw33"]
 [ext_resource type="PackedScene" uid="uid://bqhulaerjjcu" path="res://scenes/game/ui/ui.tscn" id="1_6y6ry"]
 [ext_resource type="Script" uid="uid://nd5wu0xjcyac" path="res://scripts/game/game.gd" id="1_uk4eb"]
 [ext_resource type="PackedScene" uid="uid://1xdge4lu4rnu" path="res://scenes/pause-menu/PauseMenu.tscn" id="4_0mebi"]
+[ext_resource type="PackedScene" uid="uid://baafybu0vm272" path="res://scenes/game/board/board.tscn" id="4_4uk0m"]
 
 [node name="Mascarade" type="Node3D" unique_id=1707848801]
 script = ExtResource("1_uk4eb")
@@ -16,8 +16,16 @@ shortcut_context = NodePath(".")
 [node name="Ui" parent="." unique_id=1600666623 instance=ExtResource("1_6y6ry")]
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=530035498]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.0030748844, 1.7438, 0)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.0030748844, 8.070461, 0)
 
 [node name="World" type="Node3D" parent="." unique_id=159334641]
 
-[node name="BoardView" parent="World" unique_id=1867724167 instance=ExtResource("1_6aw33")]
+[node name="Board" parent="World" unique_id=912899170 instance=ExtResource("4_4uk0m")]
+
+[node name="Floor" type="MeshInstance3D" parent="World/Board" unique_id=583049034]
+
+[node name="Walls" type="Node3D" parent="World/Board" unique_id=187413858]
+
+[node name="Cells" type="Node3D" parent="World/Board" unique_id=355949267]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1740087804]
