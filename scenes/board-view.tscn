@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dwfqdvqnsxg2h"]
+
+[sub_resource type="TileSet" id="TileSet_p0aru"]
+tile_shape = 1
+
+[node name="BoardView" type="TileMapLayer" unique_id=1051886617]
+tile_set = SubResource("TileSet_p0aru")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1145795969]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0.0030748844, 1.7438, 0)
