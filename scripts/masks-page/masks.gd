@@ -18,7 +18,7 @@ func _load_texture_from_file(path: String) -> ImageTexture:
         return ImageTexture.create_from_image(image)
 
 func _setup_background():
-        var bg_tex = _load_texture_from_file("res://assets/png/menu-bg-masks.png")
+        var bg_tex = _load_texture_from_file("res://assets/png/menu-bg-mask.png")
         if bg_tex:
                 var bg = Sprite2D.new()
                 bg.texture = bg_tex
@@ -27,7 +27,7 @@ func _setup_background():
                 add_child(bg)
 
 func _setup_title():
-        var title_tex = _load_texture_from_file("res://assets/png/menu-title-masks.png")
+        var title_tex = _load_texture_from_file("res://assets/png/menu-title-mask.png")
         if title_tex:
                 var title = Sprite2D.new()
                 title.texture = title_tex
