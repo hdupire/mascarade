@@ -6,33 +6,17 @@ signal join_game(code: String)
 var tournament_code: String = ""
 const CODE_CHARACTERS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 
-var cyclorama: Node3D
-var title_generator: Node3D
 var ui_layer: CanvasLayer
 var code_input: LineEdit
 var join_button: Button
 
 const WOOD_DARK = Color(0.35, 0.22, 0.12)
 const WOOD_MEDIUM = Color(0.5, 0.32, 0.18)
-const WOOD_LIGHT = Color(0.65, 0.45, 0.25)
 const CREAM = Color(0.95, 0.9, 0.8)
-const TRIBAL_ACCENT = Color(0.8, 0.35, 0.15)
+const TRIBAL_ACCENT = Color(0.85, 0.45, 0.1)
 
 func _ready():
-	_setup_3d_scene()
 	_setup_ui()
-
-func _setup_3d_scene():
-	var cyclorama_scene = load("res://scenes/main-menu/components/cyclorama.tscn")
-	if cyclorama_scene:
-		cyclorama = cyclorama_scene.instantiate()
-		add_child(cyclorama)
-	
-	var title_scene = load("res://scenes/main-menu/components/title_generator.tscn")
-	if title_scene:
-		title_generator = title_scene.instantiate()
-		title_generator.position = Vector3(0, 2.2, 0)
-		add_child(title_generator)
 
 func _setup_ui():
 	ui_layer = CanvasLayer.new()
@@ -41,6 +25,19 @@ func _setup_ui():
 	var main_container = Control.new()
 	main_container.set_anchors_preset(Control.PRESET_FULL_RECT)
 	ui_layer.add_child(main_container)
+	
+	var bg_texture = load("res://assets/main_menu_visual.svg")
+	if bg_texture:
+		var bg = TextureRect.new()
+		bg.texture = bg_texture
+		bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+		bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+		main_container.add_child(bg)
+	else:
+		var fallback_bg = ColorRect.new()
+		fallback_bg.color = Color(0.15, 0.1, 0.05)
+		fallback_bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+		main_container.add_child(fallback_bg)
 	
 	var center = CenterContainer.new()
 	center.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -51,7 +48,7 @@ func _setup_ui():
 	center.add_child(vbox)
 	
 	var spacer_top = Control.new()
-	spacer_top.custom_minimum_size = Vector2(0, 160)
+	spacer_top.custom_minimum_size = Vector2(0, 320)
 	vbox.add_child(spacer_top)
 	
 	var tournament_panel = _create_tournament_panel()
@@ -73,16 +70,16 @@ func _create_tournament_panel() -> PanelContainer:
 	var panel = PanelContainer.new()
 	
 	var style = StyleBoxFlat.new()
-	style.bg_color = WOOD_MEDIUM
-	style.border_width_left = 4
-	style.border_width_right = 4
-	style.border_width_top = 4
-	style.border_width_bottom = 4
-	style.border_color = WOOD_DARK
-	style.corner_radius_top_left = 20
-	style.corner_radius_top_right = 20
-	style.corner_radius_bottom_left = 20
-	style.corner_radius_bottom_right = 20
+	style.bg_color = Color(0.1, 0.07, 0.04, 0.85)
+	style.border_width_left = 3
+	style.border_width_right = 3
+	style.border_width_top = 3
+	style.border_width_bottom = 3
+	style.border_color = TRIBAL_ACCENT
+	style.corner_radius_top_left = 16
+	style.corner_radius_top_right = 16
+	style.corner_radius_bottom_left = 16
+	style.corner_radius_bottom_right = 16
 	style.content_margin_left = 25
 	style.content_margin_right = 25
 	style.content_margin_top = 18
@@ -107,19 +104,19 @@ func _create_tournament_panel() -> PanelContainer:
 	code_input.custom_minimum_size = Vector2(160, 50)
 	code_input.add_theme_font_size_override("font_size", 32)
 	code_input.add_theme_color_override("font_color", WOOD_DARK)
-	code_input.add_theme_color_override("font_placeholder_color", WOOD_LIGHT)
+	code_input.add_theme_color_override("font_placeholder_color", Color(0.6, 0.5, 0.4))
 	
 	var input_style = StyleBoxFlat.new()
 	input_style.bg_color = CREAM
-	input_style.border_width_left = 3
-	input_style.border_width_right = 3
-	input_style.border_width_top = 3
-	input_style.border_width_bottom = 3
-	input_style.border_color = WOOD_DARK
-	input_style.corner_radius_top_left = 12
-	input_style.corner_radius_top_right = 12
-	input_style.corner_radius_bottom_left = 12
-	input_style.corner_radius_bottom_right = 12
+	input_style.border_width_left = 2
+	input_style.border_width_right = 2
+	input_style.border_width_top = 2
+	input_style.border_width_bottom = 2
+	input_style.border_color = TRIBAL_ACCENT
+	input_style.corner_radius_top_left = 10
+	input_style.corner_radius_top_right = 10
+	input_style.corner_radius_bottom_left = 10
+	input_style.corner_radius_bottom_right = 10
 	code_input.add_theme_stylebox_override("normal", input_style)
 	code_input.add_theme_stylebox_override("focus", input_style)
 	
@@ -131,7 +128,7 @@ func _create_tournament_panel() -> PanelContainer:
 	btn_container.add_theme_constant_override("separation", 15)
 	vbox.add_child(btn_container)
 	
-	var gen_btn = _create_wooden_button("GENERATE", WOOD_LIGHT, Vector2(120, 40), 18)
+	var gen_btn = _create_wooden_button("GENERATE", WOOD_MEDIUM, Vector2(120, 40), 18)
 	gen_btn.pressed.connect(_on_generate_code_pressed)
 	btn_container.add_child(gen_btn)
 	
@@ -151,15 +148,15 @@ func _create_wooden_button(text: String, color: Color, min_size: Vector2 = Vecto
 	
 	var style = StyleBoxFlat.new()
 	style.bg_color = color
-	style.border_width_left = 3
-	style.border_width_right = 3
-	style.border_width_top = 3
-	style.border_width_bottom = 3
-	style.border_color = WOOD_DARK
-	style.corner_radius_top_left = 15
-	style.corner_radius_top_right = 15
-	style.corner_radius_bottom_left = 15
-	style.corner_radius_bottom_right = 15
+	style.border_width_left = 2
+	style.border_width_right = 2
+	style.border_width_top = 2
+	style.border_width_bottom = 2
+	style.border_color = color.darkened(0.3)
+	style.corner_radius_top_left = 12
+	style.corner_radius_top_right = 12
+	style.corner_radius_bottom_left = 12
+	style.corner_radius_bottom_right = 12
 	btn.add_theme_stylebox_override("normal", style)
 	
 	var hover_style = style.duplicate()
@@ -171,10 +168,10 @@ func _create_wooden_button(text: String, color: Color, min_size: Vector2 = Vecto
 	btn.add_theme_stylebox_override("pressed", pressed_style)
 	
 	var disabled_style = style.duplicate()
-	disabled_style.bg_color = Color(0.4, 0.35, 0.3)
-	disabled_style.border_color = Color(0.3, 0.25, 0.2)
+	disabled_style.bg_color = Color(0.35, 0.3, 0.25)
+	disabled_style.border_color = Color(0.25, 0.2, 0.15)
 	btn.add_theme_stylebox_override("disabled", disabled_style)
-	btn.add_theme_color_override("font_disabled_color", Color(0.6, 0.55, 0.5))
+	btn.add_theme_color_override("font_disabled_color", Color(0.55, 0.5, 0.45))
 	
 	return btn
 
