@@ -7,6 +7,9 @@ signal open_powerups
 signal open_settings
 
 var tournament_code: String = ""
+var game_btn_size: Vector2 = Vector2.ZERO
+var new_game_zone: Rect2
+var join_zone: Rect2
 const CODE_CHARACTERS = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 
 const CREAM = Color(0.95, 0.9, 0.8)
@@ -116,23 +119,11 @@ func _setup_game_button():
                 game_btn_sprite.texture = game_tex
                 game_btn_sprite.position = Vector2(screen_size.x / 2, screen_size.y * 0.65)
                 add_child(game_btn_sprite)
+                game_btn_size = game_tex.get_size()
                 
-                var area = Area2D.new()
-                area.position = Vector2.ZERO
-                area.input_pickable = true
-                area.monitorable = true
-                area.monitoring = true
-                game_btn_sprite.add_child(area)
-                
-                var collision = CollisionShape2D.new()
-                var shape = RectangleShape2D.new()
-                shape.size = game_tex.get_size() + Vector2(10, 10)
-                collision.shape = shape
-                area.add_child(collision)
-                
-                area.input_event.connect(_on_game_btn_clicked)
-                area.mouse_entered.connect(func(): game_btn_sprite.modulate = Color(1.3, 1.3, 1.3))
-                area.mouse_exited.connect(func(): game_btn_sprite.modulate = Color.WHITE)
+                var btn_top_left = game_btn_sprite.position - game_btn_size / 2
+                new_game_zone = Rect2(btn_top_left.x + 100 - 100, btn_top_left.y + 170 - 30, 200, 60)
+                join_zone = Rect2(btn_top_left.x + 340 - 100, btn_top_left.y + 170 - 30, 200, 60)
         
         _setup_code_input()
 
@@ -404,15 +395,21 @@ func _input(event):
                         emit_signal("open_settings")
                         return
                 
-                if game_btn_sprite and _is_point_in_sprite(mouse_pos, game_btn_sprite):
-                        if not _is_point_in_code_input(mouse_pos):
-                                print("Game button clicked via _input!")
-                                if tournament_code.length() != 4:
-                                        tournament_code = _generate_code()
-                                        code_input.text = tournament_code
-                                        print("Generated code: ", tournament_code)
+                if _is_point_in_new_game_zone(mouse_pos):
+                        print("NEW GAME clicked!")
+                        tournament_code = _generate_code()
+                        code_input.text = tournament_code
+                        print("Generated code: ", tournament_code)
+                        return
+                
+                if _is_point_in_join_zone(mouse_pos):
+                        print("JOIN clicked!")
+                        if tournament_code.length() == 4:
+                                print("Joining with code: ", tournament_code)
                                 emit_signal("play_pressed")
-                                return
+                        else:
+                                print("Need valid 4-character code to join")
+                        return
                 
                 if mask_btn and _is_point_in_rigidbody(mouse_pos, mask_btn):
                         print("Mask button clicked via _input!")
@@ -444,3 +441,13 @@ func _is_point_in_code_input(point: Vector2) -> bool:
                 return false
         var rect = Rect2(code_input.position, code_input.size)
         return rect.has_point(point)
+
+func _is_point_in_new_game_zone(point: Vector2) -> bool:
+        var btn_top_left = game_btn_sprite.position - game_btn_size / 2
+        var zone = Rect2(btn_top_left.x + 100 - 100, btn_top_left.y + 170 - 30, 200, 60)
+        return zone.has_point(point)
+
+func _is_point_in_join_zone(point: Vector2) -> bool:
+        var btn_top_left = game_btn_sprite.position - game_btn_size / 2
+        var zone = Rect2(btn_top_left.x + 340 - 100, btn_top_left.y + 170 - 30, 200, 60)
+        return zone.has_point(point)

@@ -34,6 +34,13 @@ func _setup_title():
                 title.centered = false
                 title.position = Vector2(screen_size.x - title_tex.get_size().x, 0)
                 add_child(title)
+        
+        var cards_tex = _load_texture_from_file("res://assets/png/menu-cards-powerups.png")
+        if cards_tex:
+                var cards = Sprite2D.new()
+                cards.texture = cards_tex
+                cards.position = Vector2(screen_size.x / 2, screen_size.y / 2)
+                add_child(cards)
 
 func _input(event):
         if event.is_action_pressed("ui_cancel"):

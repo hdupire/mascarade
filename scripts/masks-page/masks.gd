@@ -34,6 +34,13 @@ func _setup_title():
                 title.centered = false
                 title.position = Vector2(0, 0)
                 add_child(title)
+        
+        var trophees_tex = _load_texture_from_file("res://assets/png/menu-trophees-mask.png")
+        if trophees_tex:
+                var trophees = Sprite2D.new()
+                trophees.texture = trophees_tex
+                trophees.position = Vector2(screen_size.x / 2, screen_size.y / 2)
+                add_child(trophees)
 
 func _input(event):
         if event.is_action_pressed("ui_cancel"):

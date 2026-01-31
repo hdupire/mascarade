@@ -26,6 +26,13 @@ func _setup_background():
                 bg.centered = false
                 bg.scale = screen_size / bg_tex.get_size()
                 add_child(bg)
+        
+        var settings_tex = _load_texture_from_file("res://assets/png/menu-settings.png")
+        if settings_tex:
+                var settings_sprite = Sprite2D.new()
+                settings_sprite.texture = settings_tex
+                settings_sprite.position = Vector2(screen_size.x / 2, screen_size.y / 2)
+                add_child(settings_sprite)
 
 func _setup_clickable_zones():
         var zone_width = 400.0
