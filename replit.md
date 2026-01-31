@@ -10,31 +10,54 @@ Masquerade is an online multiplayer adaptation of the traditional board game Bar
 
 - **Engine**: Godot 4.6
 - **Rendering**: OpenGL3/OpenGLES (compatibility mode for Replit)
-- **Physics**: Jolt Physics 3D
+- **Physics**: 2D Physics for menu, Jolt Physics 3D for game
 
 ## Project Structure
 
 ```
 .
-├── assets/               # Game assets (SVGs, textures)
+├── assets/
+│   ├── png/              # Menu button/logo PNGs (runtime loaded)
+│   │   ├── menu-bg.png
+│   │   ├── menu-logo.png
+│   │   ├── menu-btn-game.png
+│   │   ├── menu-btn-mask.png
+│   │   ├── menu-btn-powerup.png
+│   │   └── menu-btn-settings.png
+│   └── font/
+│       └── NEWTONIN.OTF  # Custom font (Newton Inline)
 ├── scenes/
 │   ├── main.tscn         # Entry scene with scene manager
-│   ├── main-menu/        # Main menu (Node3D based)
-│   │   ├── components/   # Menu components (cyclorama, title, buttons)
-│   │   └── main-menu.tscn
+│   ├── main-menu/
+│   │   └── main-menu.tscn  # Node2D animated menu
 │   ├── game/             # Game scenes
 │   └── pause-menu/       # Pause menu
 ├── scripts/
 │   ├── main.gd           # Scene manager
-│   └── main-menu/        # Menu scripts with tournament code
-└── project.godot         # Godot project configuration
+│   └── main-menu/
+│       └── menu.gd       # Animated menu with physics
+└── project.godot
 ```
 
-## Menu Features
+## Menu System
 
-- **3D Node-based menu** with cyclorama background
-- **Tournament Code System**: Generate 4-character codes or enter existing codes to join games
-- **Title Generator**: Displays MASQUERADE title (SVG or Label3D fallback)
+### Visual Elements
+- **Background**: Full-screen PNG background
+- **Logo**: Centered at 40% height, occasional wiggle animation
+- **Game Button**: Centered at 65% height, gentle bobbing, tournament code UI overlay
+- **Settings Button**: Top-right (90%/10%), random spin animation
+- **Mask & Powerup Buttons**: Physics-based floating, collide with screen edges and other elements
+
+### Interactions
+- **Hover**: Buttons lighten (modulate to 1.3 brightness)
+- **Tournament Code**: 4-character alphanumeric (no confusing chars like O/0/I/1)
+- **NEW GAME**: Generates code and starts
+- **JOIN**: Enabled when valid code entered
+
+### Technical Notes
+- Uses `Image.load()` for runtime PNG loading (bypasses Godot import system)
+- PNG format chosen for compatibility with headless Godot environment
+- 2D physics (RigidBody2D) for floating buttons with collision
 
 ## Running the Game
 
@@ -48,5 +71,6 @@ The game runs via VNC display in Replit using OpenGL3 rendering driver.
 
 ## Recent Changes
 
-- 2026-01-31: Rebuilt main menu as Node3D with tournament code functionality
-- 2026-01-31: Added Label3D fallback for title when SVG can't load
+- 2026-01-31: Converted menu to Node2D with PNG assets and runtime image loading
+- 2026-01-31: Added physics-based floating buttons with collision
+- 2026-01-31: Added hover effects (modulate brightness) and animations (wiggle, spin, bob)
