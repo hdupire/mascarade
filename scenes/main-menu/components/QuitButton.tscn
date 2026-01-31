@@ -1,4 +1,0 @@
-[gd_scene format=3 uid="uid://8a2h6gxgbixl"]
-
-[node name="QuitButton" type="Button" unique_id=1349723610]
-text = "Quit"

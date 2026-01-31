@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://csbraojg8n55e"]
+
+[ext_resource type="Script" uid="uid://ry1s71akl113" path="res://scripts/main-menu/title_generator.gd" id="1_8j3gi"]
+
+[node name="TitleGenerator" type="Node3D" unique_id=1744641598]
+script = ExtResource("1_8j3gi")
+
+[node name="TitleNode" type="Node3D" parent="." unique_id=1350927939]

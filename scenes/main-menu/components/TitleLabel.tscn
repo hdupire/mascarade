@@ -1,9 +1,0 @@
-[gd_scene format=3 uid="uid://j0ywwx8yh5w2"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_15mum"]
-font_size = 40
-font_color = Color(0.14901961, 1, 1, 1)
-
-[node name="TitleLabel" type="Label" unique_id=224850796]
-text = "Mascarade"
-label_settings = SubResource("LabelSettings_15mum")

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://sm7rtdhubb7q"]
+
+[ext_resource type="Script" uid="uid://gy2rml6awthm" path="res://scripts/main-menu/floating_button.gd" id="1_4lwle"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_4lwle"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4lwle"]
+albedo_color = Color(0.3137255, 0.41960785, 1, 1)
+
+[node name="FloatingButton" type="Node3D" unique_id=1451902366]
+script = ExtResource("1_4lwle")
+
+[node name="ButtonMesh" type="MeshInstance3D" parent="." unique_id=972675883]
+mesh = SubResource("BoxMesh_4lwle")
+surface_material_override/0 = SubResource("StandardMaterial3D_4lwle")

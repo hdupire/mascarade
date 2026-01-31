@@ -1,4 +1,0 @@
-[gd_scene format=3 uid="uid://cou2er5er1if0"]
-
-[node name="PlayButton" type="Button" unique_id=1297856882]
-text = "Start"
