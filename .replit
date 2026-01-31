@@ -1,0 +1,29 @@
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Godot Game"
+
+[[workflows.workflow]]
+name = "Godot Game"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "godot --path . --rendering-driver opengl3"
+
+[workflows.workflow.metadata]
+outputType = "vnc"
+
+[agent]
+expertMode = true
+
+[nix]
+channel = "stable-25_05"
+packages = ["godot_4"]
